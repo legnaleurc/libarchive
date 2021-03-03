@@ -108,8 +108,10 @@ SET(libarchive_SOURCES
   archive_read_support_format_warc.c
   archive_read_support_format_xar.c
   archive_read_support_format_zip.c
-  archive_rar_header_private.h
-  archive_rar_header_private.c
+  archive_rar_private.h
+  archive_rar_private.c
+  archive_rar_code_private.h
+  archive_rar_code_private.c
   archive_string.c
   archive_string.h
   archive_string_composition.h

@@ -30,34 +30,7 @@
 #error This header is only to be used internally to libarchive.
 #endif
 
-#define MAINCODE_SIZE      299
-#define OFFSETCODE_SIZE    60
-#define LOWOFFSETCODE_SIZE 17
-#define LENGTHCODE_SIZE    28
-#define HUFFMAN_TABLE_SIZE \
-  MAINCODE_SIZE + OFFSETCODE_SIZE + LOWOFFSETCODE_SIZE + LENGTHCODE_SIZE
-
-struct huffman_tree_node
-{
-  int branches[2];
-};
-
-struct huffman_table_entry
-{
-  unsigned int length;
-  int value;
-};
-
-struct huffman_code
-{
-  struct huffman_tree_node *tree;
-  int numentries;
-  int numallocatedentries;
-  int minlength;
-  int maxlength;
-  int tablesize;
-  struct huffman_table_entry *table;
-};
+#include "archive_rar_code_private.h"
 
 struct lzss
 {
@@ -173,4 +146,4 @@ struct rar
   int has_encrypted_entries;
 };
 
-#endif /* ARCHIVE_RAR_HEADER_PRIVATE_H_INCLUDED */
+#endif /* ARCHIVE_RAR_PRIVATE_H_INCLUDED */

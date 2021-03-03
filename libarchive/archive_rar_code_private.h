@@ -23,14 +23,40 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef ARCHIVE_RAR_HEADER_PRIVATE_H_INCLUDED
-#define ARCHIVE_RAR_HEADER_PRIVATE_H_INCLUDED
+#ifndef ARCHIVE_RAR_CODE_PRIVATE_H_INCLUDED
+#define ARCHIVE_RAR_CODE_PRIVATE_H_INCLUDED
 
 #ifndef __LIBARCHIVE_BUILD
 #error This header is only to be used internally to libarchive.
 #endif
 
-/* Random number generator. */
-int archive_random(void *buf, size_t nbytes);
+#define MAINCODE_SIZE      299
+#define OFFSETCODE_SIZE    60
+#define LOWOFFSETCODE_SIZE 17
+#define LENGTHCODE_SIZE    28
+#define HUFFMAN_TABLE_SIZE \
+  MAINCODE_SIZE + OFFSETCODE_SIZE + LOWOFFSETCODE_SIZE + LENGTHCODE_SIZE
 
-#endif /* ARCHIVE_RAR_HEADER_PRIVATE_H_INCLUDED */
+struct huffman_tree_node
+{
+  int branches[2];
+};
+
+struct huffman_table_entry
+{
+  unsigned int length;
+  int value;
+};
+
+struct huffman_code
+{
+  struct huffman_tree_node *tree;
+  int numentries;
+  int numallocatedentries;
+  int minlength;
+  int maxlength;
+  int tablesize;
+  struct huffman_table_entry *table;
+};
+
+#endif /* ARCHIVE_RAR_CODE_PRIVATE_H_INCLUDED */
