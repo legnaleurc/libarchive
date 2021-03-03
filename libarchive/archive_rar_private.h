@@ -30,6 +30,7 @@
 #error This header is only to be used internally to libarchive.
 #endif
 
+#include "archive_ppmd7_private.h"
 #include "archive_rar_code_private.h"
 
 struct lzss
