@@ -2156,7 +2156,10 @@ read_data_compressed(struct archive_read *a, const void **buff, size_t *size,
     {
       start = rar->offset;
       end = start + rar->dictionary_size;
-      rar->filters.filterstart = INT64_MAX;
+      //rar->filters.filterstart = INT64_MAX;
+      if (rar->filters.filterstart < end) {
+	      end = rar->filters.filterstart;
+      }
 
       if ((actualend = expand(a, end)) < 0)
         return ((int)actualend);
